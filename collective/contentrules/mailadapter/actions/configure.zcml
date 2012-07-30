@@ -1,0 +1,36 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+              
+    <!-- Email action definition -->
+
+     <adapter factory=".mail.MailActionExecutor" />
+
+     <browser:page
+       for="plone.app.contentrules.browser.interfaces.IRuleActionAdding"
+       name="collective.actions.Mail"
+       class=".mail.MailAddForm"
+       permission="cmf.ManagePortal"
+       />
+
+     <browser:page
+       for="collective.contentrules.mailadapter.actions.mail.IMailAction"
+       name="edit"
+       class=".mail.MailEditForm"
+       permission="cmf.ManagePortal"
+       />
+
+     <plone:ruleAction
+         name="collective.actions.Mail"
+         title="Send email to a dynamic recipient"
+         description="Send an email on the triggering object"
+         for="*"
+         event="zope.component.interfaces.IObjectEvent"
+         addview="collective.actions.Mail"
+         editview="edit"
+         schema=".mail.IMailAction"
+         factory=".mail.MailAction"
+         />
+
+</configure>
