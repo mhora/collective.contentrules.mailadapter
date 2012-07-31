@@ -97,7 +97,7 @@ action or enter an email in the portal properties'
             mailhost.secureSend(message, email_recipient, source,
                                 subject=subject, subtype='plain',
                                 charset=email_charset, debug=False,
-                                From=source)
+                                )
         return True
 
 class MailAddForm(AddForm):
